@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Code Server
+  code-server:
+    image: codercom/code-server:latest
+    container_name: code-server
+    environment:
+      - PASSWORD=yourpassword  # 使用环境变量或外部 secret 存储密码
+    volumes:
+      - ./code-server:/home/coder/project
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Nextcloud
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    volumes:
+      - ./nextcloud/html:/var/www/html
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # Nginx（反向代理）
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d  # 配置文件挂载到容器内
+      - ./nginx/ssl:/etc/nginx/ssl  # SSL 证书目录挂载
+    networks:
+      - app-network
+    depends_on:
+      - code-server
+      - nextcloud
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

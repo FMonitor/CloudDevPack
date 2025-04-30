@@ -1,0 +1,26 @@
+# 忽略 Docker 相关中间文件
+*.log
+*.pid
+*.sock
+
+# 忽略 VSCode 配置
+.vscode/
+.code-server/
+
+# 忽略 SSL 证书私钥（自己设置的路径）
+ssl/
+*.pem
+*.key
+
+# 忽略用户上传内容和缓存
+nextcloud/html/data/
+nextcloud/html/config/
+nextcloud/html/apps/
+
+# 忽略 Python/Jupyter 缓存（若你后续加入监控脚本）
+__pycache__/
+*.pyc
+
+# 其他
+.env
+.DS_Store
