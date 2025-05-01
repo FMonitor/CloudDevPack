@@ -3,10 +3,19 @@ version: '3.8'
 services:
   # Code Server
   code-server:
+    ports:
+
+
+
+
+
+
+    
+      - "8888:8080"
     image: codercom/code-server:latest
     container_name: code-server
     environment:
-      - PASSWORD=yourpassword  # 使用环境变量或外部 secret 存储密码
+      - PASSWORD=123456
     volumes:
       - ./code-server:/home/coder/project
     networks:
@@ -33,6 +42,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d  # 配置文件挂载到容器内
       - ./nginx/ssl:/etc/nginx/ssl  # SSL 证书目录挂载
+      - ./nginx/html:/usr/share/nginx/html
     networks:
       - app-network
     depends_on:
