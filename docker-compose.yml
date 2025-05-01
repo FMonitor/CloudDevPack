@@ -3,24 +3,18 @@ version: '3.8'
 services:
   # Code Server
   code-server:
-    ports:
-
-
-
-
-
-
-    
-      - "8888:8080"
     image: codercom/code-server:latest
     container_name: code-server
     environment:
       - PASSWORD=123456
+      - CODE_SERVER_BASE_PATH=/code
     volumes:
-      - ./code-server:/home/coder/project
+      - ./nextcloud/html/data/monitor/files/CodeProjects:/home/coder/project
+      - ./code-server/config:/home/coder/.config/code-server
     networks:
       - app-network
     restart: unless-stopped
+    command: --bind-addr 0.0.0.0:8080 --disable-workspace-trust 
 
   # Nextcloud
   nextcloud:
