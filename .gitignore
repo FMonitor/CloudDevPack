@@ -7,17 +7,20 @@
 .vscode/
 .code-server/
 
-# 忽略 SSL 证书私钥（自己设置的路径）
+# 忽略 SSL 证书私钥
 ssl/
 *.pem
 *.key
 
 # 忽略用户上传内容和缓存
 nextcloud/html/data/
-nextcloud/html/config/
 nextcloud/html/apps/
 
-# 忽略 Python/Jupyter 缓存（若你后续加入监控脚本）
+# 忽略数据库数据卷
+mariadb/nextcloud/
+mariadb/mysql/
+
+# 忽略 Python/Jupyter 缓存
 __pycache__/
 *.pyc
 
