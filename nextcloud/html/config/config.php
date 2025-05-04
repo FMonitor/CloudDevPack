@@ -29,6 +29,7 @@ $CONFIG = array (
   'dbtype' => 'mysql',
   'version' => '31.0.4.1',
   'overwrite.cli.url' => 'https://localhost/nextcloud',
+  'overwritewebroot' => '/nextcloud',
   'dbname' => 'nextcloud',
   'dbhost' => 'mariadb:3306',
   'dbport' => '',

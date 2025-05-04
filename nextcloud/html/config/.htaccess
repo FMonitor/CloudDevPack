@@ -22,7 +22,3 @@
   </IfModule>
 </IfModule>
 
-# Section for Apache 2.2 to 2.6
-<IfModule mod_autoindex.c>
-  IndexIgnore *
-</IfModule>
