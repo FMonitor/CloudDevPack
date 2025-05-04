@@ -10,7 +10,7 @@ services:
       - PASSWORD=123456
       - CODE_SERVER_BASE_PATH=/code
     volumes:
-      - ./nextcloud/html/data/monitor/files/Code:/home/coder
+      - ./nextcloud/html/data/lcmonitor/files/Code:/home/coder
       - ./code-server/config:/home/coder/.config/code-server
     networks:
       - app-network
@@ -81,13 +81,16 @@ services:
       - DB_HOST=mariadb
       - DB_PORT=3306
       - DB_USER=wikijs
-      - DB_PASS=your_wiki_password
+      - DB_PASS=123456
       - DB_NAME=wikidb
     depends_on:
       - mariadb
     restart: unless-stopped
     networks:
       - app-network
+    volumes:
+      - ./wikijs/data:/wiki/data
+      - ./nextcloud/html/data/wikijs/files/backup:/wiki/backup
 
 networks:
   app-network:

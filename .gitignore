@@ -27,4 +27,13 @@ mariadb/mysql/
 # Portainer 
 portainer/data/
 
+# Wiki.js logs and config
+wikijs/logs/
+wikijs/config.yml
+wikijs/storage/
+wikijs/config/
+wikijs/data/
+wikijs/backups/
+*.sqlite
+*.log
 
