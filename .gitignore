@@ -1,29 +1,30 @@
-# 忽略 Docker 相关中间文件
+# Docker 
 *.log
 *.pid
 *.sock
+secrets/
+*.secret
+.env
+.DS_Store
 
-# 忽略 VSCode 配置
+# code-server
 .vscode/
 .code-server/
 
-# 忽略 SSL 证书私钥
+# SSL
 ssl/
 *.pem
 *.key
 
-# 忽略用户上传内容和缓存
+# nextcloud
 nextcloud/html/data/
 nextcloud/html/apps/
 
-# 忽略数据库数据卷
+# mariadb
 mariadb/nextcloud/
 mariadb/mysql/
 
-# 忽略 Python/Jupyter 缓存
-__pycache__/
-*.pyc
+# Portainer 
+portainer/data/
 
-# 其他
-.env
-.DS_Store
+

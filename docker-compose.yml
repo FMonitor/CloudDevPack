@@ -10,7 +10,7 @@ services:
       - PASSWORD=123456
       - CODE_SERVER_BASE_PATH=/code
     volumes:
-      - ./nextcloud/html/data/codeuser:/home/coder
+      - ./nextcloud/html/data/monitor/files/Code:/home/coder
       - ./code-server/config:/home/coder/.config/code-server
     networks:
       - app-network
@@ -61,6 +61,33 @@ services:
     networks:
       - app-network
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer/data:/data
+    networks:
+      - app-network
+
+  wikijs:
+    image: ghcr.io/requarks/wiki:latest
+    container_name: wikijs
+    ports:
+      - "3030:3000"  # 可通过 localhost:3030 访问
+    environment:
+      - DB_TYPE=mysql
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USER=wikijs
+      - DB_PASS=your_wiki_password
+      - DB_NAME=wikidb
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    networks:
+      - app-network
 
 networks:
   app-network:
