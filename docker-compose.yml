@@ -19,8 +19,6 @@ services:
 
   # Nextcloud
   nextcloud:
-    ports:
-    - "8022:80"
     image: nextcloud:latest
     container_name: nextcloud
     volumes:
@@ -89,9 +87,8 @@ services:
     networks:
       - app-network
     volumes:
-      - ./wikijs/data:/wiki/data
-      - ./nextcloud/html/data/wikijs/files/backup:/wiki/backup
-
+      - ./nextcloud/html/data/monitor/files/wiki:/wiki/data/repo
+      - ./wikijs/config.yml:/wiki/config.yml:ro
 networks:
   app-network:
     driver: bridge

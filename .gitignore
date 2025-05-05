@@ -23,6 +23,7 @@ nextcloud/html/apps/
 # mariadb
 mariadb/nextcloud/
 mariadb/mysql/
+mariadb/wikidb/
 
 # Portainer 
 portainer/data/
