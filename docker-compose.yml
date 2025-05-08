@@ -35,8 +35,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d  # 配置文件挂载到容器内
-      - ./nginx/ssl:/etc/nginx/ssl  # SSL 证书目录挂载
+      - ./nginx/conf.d:/etc/nginx/conf.d 
+      - /etc/letsencrypt:/etc/letsencrypt  
       - ./nginx/html:/usr/share/nginx/html
     networks:
       - app-network

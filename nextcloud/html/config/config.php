@@ -24,10 +24,11 @@ $CONFIG = array (
   'datadirectory' => '/var/www/html/data',
   'dbtype' => 'mysql',
   'version' => '31.0.4.1',
-  'overwrite.cli.url' => 'https://localhost/nextcloud',
+  'overwrite.cli.url' => 'https://lcmonitor.dynv6.net/nextcloud',
   'overwritewebroot' => '/nextcloud',
   'overwritehost' => 'lcmonitor.dynv6.net',
   'overwriteprotocol' => 'https',
+  'trusted_proxies' => ['nginx'],
   'trusted_domains' =>
     array (
       0 => 'localhost',
