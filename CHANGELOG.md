@@ -1,10 +1,28 @@
 # 更新日志
 
+## [1.0.1] - 2025-05-09
+### 新增
+
+* 支持通过 AAAA 记录绑定子域名 wiki.lcmonitor.dynv6.net，并成功签发 DNS 验证证书
+* 完善 Nginx 配置，支持多子域名服务部署
+* 统一主域名为服务导航入口页面，提升整体访问体验
+
+### 修复
+
+* 修复 wikijs 无法解析 CSS/JS 的路径问题，避免因部署目录不一致导致加载失败
+* 修复外部主机访问 code-server 和 nextcloud 的权限控制问题（权限炸裂）
+* 修复 certbot 与已有 nginx 冲突引发的端口占用问题
+
 ## [1.0.0] - 2025-05-08
 ### 新增
 
 * 使用Dynamic DNS服务，通过域名访问
-* 通过Let's Encrypt申请到SSL证书，支持HTTPS访问
+* 通过Let's Encrypt申请到主域名的SSL证书，支持HTTPS访问
+
+### 修复
+
+* 修复了Nginx的SSL证书配置问题，确保HTTPS访问正常
+* 修复了资源获取不使用HTTPS的问题
 
 ## [0.5.0] - 2025-05-05
 ### 新增
@@ -14,7 +32,8 @@
 * 新增wikijs的数据库配置
 
 ### 变更
-* 修改了nextcloud的用户设置，将wikijs的文件挂载到nextcloud的data目录下
+
+* 修改nextcloud的用户设置，将wikijs的文件挂载到nextcloud的data目录下
 
 ## [0.4.0] - 2025-05-04
 
