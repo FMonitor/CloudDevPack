@@ -21,16 +21,19 @@ $CONFIG = array (
   'htaccess.RewriteBase' => '/nextcloud',
   'passwordsalt' => 'QmDLgEiPANX2wn4EG8Cxhwr3/K4b4c',
   'secret' => 'i2BhP8GZpadAYa3jHOvri6Pf90CtwD8BJXVyXLqYejCtIz3Q',
-  'trusted_domains' => 
-  array (
-    0 => 'localhost:8022',
-  ),
   'datadirectory' => '/var/www/html/data',
   'dbtype' => 'mysql',
   'version' => '31.0.4.1',
   'overwrite.cli.url' => 'https://localhost/nextcloud',
   'overwritewebroot' => '/nextcloud',
-  'overwritehost' => 'localhost',
+  'overwritehost' => 'lcmonitor.dynv6.net',
+  'overwriteprotocol' => 'https',
+  'trusted_domains' =>
+    array (
+      0 => 'localhost',
+      1 => 'lcmonitor.local',
+      2 => 'lcmonitor.dynv6.net',
+    ),
   'overwriteprotocol' => 'https',
   'dbname' => 'nextcloud',
   'dbhost' => 'mariadb:3306',
