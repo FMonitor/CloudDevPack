@@ -1,35 +1,49 @@
 # 更新日志
+## [1.0.2] - 2025-05-10
+
+## 新增
+
+* 新增了 Wiki.js 导出目录，将备份路径挂载至 Nextcloud 
+* 新增 code-server 的默认工作目录 `/var/www`，并挂载至宿主机目录，解决扩展插件潜在路径依赖
+
+
+### 修复
+
+* 修复 Nextcloud config 目录无法写入的问题，通过设置目录权限恢复配置能力
+* 修复 code-server 无法创建默认路径 `/var/www` 报错的问题，通过显式创建并挂载解决
+
+### 优化
+
+* 将 wikijs 备份文件和 code-server 挂载至 nextcloud 的 data 目录下，便于统一管理
+* 清除 code-server 启动残留配置，避免无效路径反复尝试访问
 
 ## [1.0.1] - 2025-05-09
 ### 新增
 
-* 支持通过 AAAA 记录绑定子域名 wiki.lcmonitor.dynv6.net，并成功签发 DNS 验证证书
+* 通过 AAAA 记录绑定子域名 wiki.lcmonitor.dynv6.net，并成功签发 DNS 验证证书
 * 完善 Nginx 配置，支持多子域名服务部署
 * 统一主域名为服务导航入口页面，提升整体访问体验
 
 ### 修复
 
-* 修复 wikijs 无法解析 CSS/JS 的路径问题，避免因部署目录不一致导致加载失败
-* 修复外部主机访问 code-server 和 nextcloud 的权限控制问题（权限炸裂）
-* 修复 certbot 与已有 nginx 冲突引发的端口占用问题
+* 修复 wikijs 无法解析 CSS/JS 的路径问题
 
 ## [1.0.0] - 2025-05-08
 ### 新增
 
-* 使用Dynamic DNS服务，通过域名访问
-* 通过Let's Encrypt申请到主域名的SSL证书，支持HTTPS访问
+* 使用 Dynamic DNS 服务，实现通过域名访问
+* 通过 Let's Encrypt 申请到主域名的 SSL 证书，支持 HTTPS 访问
 
 ### 修复
 
-* 修复了Nginx的SSL证书配置问题，确保HTTPS访问正常
-* 修复了资源获取不使用HTTPS的问题
+* 修复了 Nginx 的 SSL 证书配置问题，确保 HTTPS 访问正常
+* 修复了资源获取不使用 HTTPS 的问题
 
 ## [0.5.0] - 2025-05-05
 ### 新增
 
-* 新增了wikijs服务，提供文档管理功能
-* 新增了Nginx的反向代理配置，支持通过子域名访问wikijs
-* 新增wikijs的数据库配置
+* 新增了 wikijs 服务，提供文档管理功能
+* 新增了 Nginx 的反向代理配置，支持通过子域名访问 wikijs
 
 ### 变更
 
@@ -39,13 +53,11 @@
 
 ### 新增
 
-* 将code-server的操作路径挂载到Nextcloud的data目录下，便于代码下载
 * 新增了容器管理工具portainer
 
 ### 变更
 
-* 修改了nextcloud的工作路径为`/nextcloud/`，统一通过主机名访问
-* 为code-server在nextcloud下新建了一个用户，用于代码管理
+* 修改了 nextcloud 的工作路径为`/nextcloud/`，统一通过主机名访问
 
 ### 修复
 
@@ -56,20 +68,19 @@
 
 ### 新增
 
-* 新增MariaDB数据库服务，为Nextcloud提供数据存储
-* Nextcloud连接至数据库，安装并配置Nextcloud
+* 新增 MariaDB 数据库服务，为 Nextcloud 提供数据存储
+* Nextcloud 连接至数据库，安装并配置 Nextcloud
 
 ## [0.2.1] - 2025-05-02
 
 ### 新增
 
-* 为Nginx的code-server新增WebSocket支持，解决code-server无法实时更新的问题
+* 为 Nginx 的 code-server 新增 WebSocket 支持，解决code-server无法实时更新的问题
 
 ### 修复
 
 * 修复了Nginx主机名解析问题，确保可以通过域名访问
 * 修复了localhost/code/下无法重定向到登录页面问题
-* 修复了code-server无法创建新文件夹的权限问题
 
 ## [0.2.0] - 2025-05-01
 ### 新增

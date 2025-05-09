@@ -5,13 +5,14 @@ services:
   code-server:
     image: codercom/code-server:latest
     container_name: code-server
-    user: "1001:1001"
+    user: "33:33"
     environment:
       - PASSWORD=123456
       - CODE_SERVER_BASE_PATH=/code
     volumes:
-      - ./nextcloud/html/data/lcmonitor/files/Code:/home/coder
+      - ./nextcloud/html/data/codeserver/files:/home/coder
       - ./code-server/config:/home/coder/.config/code-server
+      - ./code-server/data/www:/var/www
     networks:
       - app-network
     restart: unless-stopped
@@ -72,8 +73,7 @@ services:
   wikijs:
     image: ghcr.io/requarks/wiki:latest
     container_name: wikijs
-    ports:
-      - "3030:3000"  # 可通过 localhost:3030 访问
+    user: "33:33"
     environment:
       - DB_TYPE=mysql
       - DB_HOST=mariadb
@@ -87,7 +87,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./nextcloud/html/data/monitor/files/wiki:/wiki/data/repo
+      - ./nextcloud/html/data/wikijs/files:/wiki/data/
       - ./wikijs/config.yml:/wiki/config.yml:ro
 networks:
   app-network:

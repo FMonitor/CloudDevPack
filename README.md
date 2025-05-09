@@ -1,95 +1,112 @@
 # Web 开发环境集成平台（基于 Docker 构建）
 
-这是一个通过 Docker 构建的个人全栈开发环境，支持远程访问、安全加密、模块化管理，适用于开发、学习与部署测试。平台集成了 VSCode 在线编辑器、私有云盘、容器可视化管理、资源监控与文档平台。
+本项目旨在通过 Docker 搭建一个多功能的个人开发平台，集成了在线代码编辑器、私有网盘、文档管理、反向代理、容器管理与系统监控等工具，适合用于学习、开发和运维实践。
+
+## 📦 集成组件
+
+| 组件              | 功能简介                |
+| --------------- | ------------------- |
+| **Nginx**       | 统一反向代理与 HTTPS 网关    |
+| **code-server** | 基于 Web 的 VSCode 编辑器 |
+| **Nextcloud**   | 私有网盘、文件同步与共享平台      |
+| **Wiki.js**     | 文档管理与知识库系统          |
+| **Portainer**   | 可视化 Docker 容器管理界面   |
+| **Netdata**     | 实时系统资源监控与图表展示       |
 
 ---
 
-## 🔧 已集成组件
+## 🧱 系统架构
 
-| 组件              | 描述                            |
-| --------------- | ----------------------------- |
-| **Nginx**       | 统一入口，反向代理和 HTTPS 加密           |
-| **code-server** | 基于浏览器的 VSCode 在线开发环境          |
-| **Nextcloud**   | 私有云盘，支持同步、分享与备份               |
-| **Portainer**   | Docker 可视化管理界面                |
-| **Wiki.js**     | 文档管理系统，支持 Markdown 与权限控制      |
-| **MariaDB**     | 关系型数据库，支撑 Nextcloud 与 Wiki.js |
-| **Netdata**     | 实时系统性能监控                      |
+### 后台服务
 
----
+* **Nginx**：统一入口与 HTTPS 支持
+* **Docker Engine**：容器管理运行平台
 
-## 🧑‍💻 系统架构
+### 前台服务
 
-```
-主机：Windows 
-├── WSL2: Ubuntu 
-　　└── Docker Engine  
-　　　　├── nginx          # 网关 + 反代 + SSL  
-　　　　├── code-server    # 在线开发环境  
-　　　　├── nextcloud      # 私有云盘  
-　　　　├── portainer      # 容器可视化  
-　　　　├── wikijs         # 知识管理平台  
-　　　　├── mariadb        # 数据库  
-　　　　└── netdata        # 性能监控  
-```
+* **code-server**：在线开发环境
+* **Nextcloud**：文件管理与挂载目标
+* **Wiki.js**：知识库系统，集成导航主页
+* **Portainer**：容器运维可视化管理
+* **Netdata**：主机资源实时监控
+
+系统部署环境为：
+
+* Windows 11 + WSL2 (Ubuntu 24.04)
 
 ---
 
 ## 🚀 快速启动
 
-### 1. 克隆项目
+1. 克隆本项目
 
 ```bash
-git clone https://github.com/yourusername/web-dev-platform.git
+git clone https://github.com/FMonitor/CloudDevPack.git
 cd web-dev-platform
 ```
 
-### 2. 可选配置：编辑 `.env` 文件，自定义端口与域名
+2. 编辑 `.env` 文件配置端口与域名（可选）
 
-### 3. 启动服务
+3. 启动服务（确保已安装 Docker 与 Docker Compose）
 
 ```bash
 docker compose up -d
 ```
 
-### 4. 项目演示地址（服务配置中，暂不可访问）
+4. 打开浏览器访问：
 
-| 服务          | 示例地址                                                                             |
-| ----------- | -------------------------------------------------------------------------------- |
-| 导航页         | [https://lcmonitor.dynv6.net](https://lcmonitor.dynv6.net)                       |
-| Wiki.js     | [https://wiki.lcmonitor.dynv6.net](https://wiki.lcmonitor.dynv6.net)             |
+| 服务          | 默认地址                                                             |
+| ----------- | ---------------------------------------------------------------- |
+| code-server | [https://lcmonitor.dynv6.net/code/](https://lcmonitor.dynv6.net/code/)           |
+| Nextcloud   | [https://lcmonitor.dynv6.net/nextcloud/](https://lcmonitor.dynv6.net/nextcloud/) |
+| Wiki.js     | [https://wiki.lcmonitor.dynv6.net/](https://wiki.lcmonitor.dynv6.net/)           |
+| Portainer   | [https://lcmonitor.dynv6.net:9000](https://lcmonitor.dynv6.net:9000)             |
+| Netdata     | [https://lcmonitor.dynv6.net:19999](https://lcmonitor.dynv6.net:19999)           |
 
 ---
 
+## 🔐 SSL 配置说明
 
-## 📂 文件系统设置
+Nginx 容器负责为所有服务配置反向代理与 HTTPS 支持，默认支持自签名证书，建议通过 Let’s Encrypt + DNS 验证申请正式证书。
 
-已预配置以下用户和文件绑定：
+---
 
-* `code-server` 设置了定向指定目录的账户，便于文件管理
-* `Wiki.js` 文件和数据库配置已按需完成
+## 📁 文件挂载说明
 
-其他Nextcloud用户账户由使用者根据需求自行创建和配置
+* code-server 与 Wiki.js 的数据目录均已挂载至 Nextcloud 的用户目录下，便于文件管理与统一备份
+* 所有服务目录权限已设置为 UID/GID 1000，确保容器内部与 Nextcloud 均可读写
 
 ---
 
 ## 🛠 技术栈与工具
 
-* Docker + Docker Compose
-* Nginx + Let’s Encrypt
-* Nextcloud + PHP-FPM
-* code-server (VSCode Web)
-* MariaDB / Wiki.js
+* Linux / Ubuntu / WSL2
+* Docker & Docker Compose
+* Nginx + SSL (Let's Encrypt)
+* Nextcloud + MariaDB
+* code-server (VSCode in browser)
+* Wiki.js + PostgreSQL
 * Portainer / Netdata
-* DNS: dynv6 + DNS-01 验证方式
 
 ---
 
-## 📌 TODO 计划
+## ✅ 已完成特性
 
-* [ ] 完善权限配置，确保外部访问安全
-* [ ] 添加自动镜像构建与部署脚本
-* [ ] 支持一键部署到 Azure 平台
-* [ ] 容器重构，模块可选构建
-* [ ] 自动定期备份配置与数据
-* [ ] 整合 Grafana + Prometheus（替代或辅助 Netdata）
+* [x] 集成多服务容器架构
+* [x] 自定义反向代理路径（如 /code/ /wiki/）
+* [x] 挂载文件至 Nextcloud 统一目录
+* [x] 配置 DNS 验证的 HTTPS 证书
+* [x] 支持 Wiki.js 导出备份
+* [x] 修复跨服务权限写入问题
+
+---
+
+## 📌 TODO
+
+* [ ] 测试容器镜像的完整性与重部署可用性
+* [ ] 设计 Azure 等平台的部署方案
+* [ ] 后续根据需要扩展其他模块（如 CI/CD）
+
+---
+
+欢迎关注本项目的持续更新与优化实践！

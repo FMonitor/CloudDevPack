@@ -9,7 +9,7 @@ secrets/
 
 # code-server
 .vscode/
-.code-server/
+.code-server/data/
 
 # SSL
 ssl/
