@@ -19,7 +19,7 @@ ssl/
 # nextcloud
 nextcloud/html/data/
 nextcloud/html/apps/
-nextcloud/html/configs/
+nextcloud/html/config/
 
 # mariadb
 mariadb/nextcloud/
