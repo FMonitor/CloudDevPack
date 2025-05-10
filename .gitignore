@@ -39,3 +39,5 @@ wikijs/backups/
 *.sqlite
 *.log
 
+# Nginx
+nginx/html
